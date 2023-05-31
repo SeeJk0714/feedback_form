@@ -9,7 +9,6 @@
     $query->execute();
     $questions = $query->fetchAll();
 
-
 ?>
 <form
     method="POST"
@@ -22,11 +21,16 @@
                 <label for="name" class="form-label fw-bold">Name</label>
                 <input 
                     type="text" 
-                    class="form-control" 
+                    class="form-control disabled" 
                     id="name" 
                     name="name" 
-                    placeholder="Enter your name"
-                    >
+                    <?php if(isset($_SESSION['user'])){?>
+                         value='<?= $_SESSION['user']['name']; ?>'
+                         disabled
+                    <?php }else { ?>
+                        placeholder='Enter your name'
+                    <?php }?>
+                />
             </div>
             <div class="col">
                 <label for="email" class="form-label fw-bold">Email</label>
@@ -35,7 +39,12 @@
                     class="form-control" 
                     id="email" 
                     name="email" 
-                    placeholder="Enter your email"
+                    <?php if(isset($_SESSION['user'])){?>
+                         value='<?= $_SESSION['user']['email']; ?>'
+                         disabled
+                    <?php }else { ?>
+                        placeholder='Enter your email'
+                    <?php }?>
                     >
             </div>
         </div>

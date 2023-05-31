@@ -4,17 +4,22 @@
     $database = connectToDB();
 
     // load all the questions
-    $sql = 'SELECT * FROM questions';
+    $sql = "SELECT * FROM questions ";
     $query = $database->prepare($sql);
     $query->execute();
     $questions = $query->fetchAll();
 
     // load all the results
-    $sql = 'SELECT * FROM results';
+    $sql = "SELECT 
+            results.*,
+            users.name ,
+            users.email
+            FROM results
+            JOIN users
+            ON results.user_id = users.id";
     $query = $database->prepare($sql);
     $query->execute();
     $results = $query->fetchAll();
-
 
     require 'parts/header.php';
 ?>
